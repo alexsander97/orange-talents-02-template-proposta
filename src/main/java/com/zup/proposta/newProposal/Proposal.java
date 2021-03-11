@@ -1,5 +1,7 @@
 package com.zup.proposta.newProposal;
 
+import com.zup.proposta.consultingFinancialAnalysis.FinancialAnalysisStatus;
+import com.zup.proposta.consultingFinancialAnalysis.ProposalStatus;
 import com.zup.proposta.shared.annotations.CpfOrCnpj;
 
 import javax.persistence.*;
@@ -35,6 +37,9 @@ public class Proposal {
     @Positive
     private BigDecimal salary;
 
+    @Enumerated(EnumType.STRING)
+    private ProposalStatus proposalStatus;
+
     @Deprecated
     public Proposal() {
 
@@ -50,5 +55,20 @@ public class Proposal {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setProposalStatus(FinancialAnalysisStatus status) {
+        if (status.equals(FinancialAnalysisStatus.COM_RESTRICAO)) {
+            this.proposalStatus = ProposalStatus.NAO_ELEGIVEL;
+        }
+        this.proposalStatus = ProposalStatus.ELEGIVEL;
     }
 }
