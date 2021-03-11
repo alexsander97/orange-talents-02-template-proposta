@@ -64,11 +64,8 @@ public class Proposal {
     public String getName() {
         return name;
     }
-
+    
     public void setProposalStatus(FinancialAnalysisStatus status) {
-        if (status.equals(FinancialAnalysisStatus.COM_RESTRICAO)) {
-            this.proposalStatus = ProposalStatus.NAO_ELEGIVEL;
-        }
-        this.proposalStatus = ProposalStatus.ELEGIVEL;
+        this.proposalStatus = status.getProposalStatus();
     }
 }
