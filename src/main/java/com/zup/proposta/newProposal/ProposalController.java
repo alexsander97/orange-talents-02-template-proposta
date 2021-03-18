@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/proposal")
@@ -41,10 +42,20 @@ public class ProposalController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get(@PathVariable("id") Long id) {
+        Optional<Proposal> proposal = this.repository.findById(id);
+        if(!proposal.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(new ProposalResponse(proposal.get()));
+    }
+
     private void consultationFinancialAnalysisAndUpdateStatus(Proposal proposal) {
         FinancialAnalysisResponse response = financialAnalysisClient.financialAnalysis(
-                new FinancialAnalysisRequest(proposal.getDocument(), proposal.getName(), String.valueOf(proposal.getId())));
-        proposal.setProposalStatus(response.getStatus());
+                new FinancialAnalysisRequest(proposal));
+        proposal.updateStatus(response.getStatus());
         repository.save(proposal);
     }
 }

@@ -1,9 +1,9 @@
-package com.zup.proposta.consultingFinancialAnalysis;
+package com.zup.proposta.card;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zup.proposta.newProposal.Proposal;
 
-public class FinancialAnalysisRequest {
+public class CardRequest {
 
     @JsonProperty(value = "documento")
     private String document;
@@ -14,10 +14,9 @@ public class FinancialAnalysisRequest {
     @JsonProperty(value = "idProposta")
     private String idProposal;
 
-
-    public FinancialAnalysisRequest(Proposal proposal) {
+    public CardRequest(Proposal proposal) {
         this.document = proposal.getDocument();
         this.name = proposal.getName();
-        this.idProposal = String.valueOf(proposal.getId());
+        this.idProposal = proposal.getId().toString();
     }
 }
