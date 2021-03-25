@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class CardResponse {
+public class CardApiResponse {
 
     @JsonProperty("id")
     private String cardNumber;
@@ -19,7 +19,7 @@ public class CardResponse {
     @JsonProperty("emitidoEm")
     private LocalDateTime issuedOn;
 
-    public CardResponse(String cardNumber, String holder, BigDecimal limit, LocalDateTime issuedOn) {
+    public CardApiResponse(String cardNumber, String holder, BigDecimal limit, LocalDateTime issuedOn) {
         this.cardNumber = cardNumber;
         this.holder = holder;
         this.limit = limit;

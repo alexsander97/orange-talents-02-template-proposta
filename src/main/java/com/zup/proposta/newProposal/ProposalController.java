@@ -29,7 +29,7 @@ public class ProposalController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> create(@RequestBody @Valid NewProposalRequest request, UriComponentsBuilder uriComponentsBuilder) throws BindException {
+    public ResponseEntity<?> create(@RequestBody @Valid NewProposalRequest request, UriComponentsBuilder uriComponentsBuilder)  {
         if (repository.existsByDocument(request.getDocument())) {
             return ResponseEntity.unprocessableEntity().build();
         }

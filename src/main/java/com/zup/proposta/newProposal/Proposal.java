@@ -1,11 +1,10 @@
 package com.zup.proposta.newProposal;
 
 import com.zup.proposta.card.Card;
-import com.zup.proposta.card.CardResponse;
+import com.zup.proposta.card.CardApiResponse;
 import com.zup.proposta.consultingFinancialAnalysis.FinancialAnalysisStatus;
 import com.zup.proposta.consultingFinancialAnalysis.ProposalStatus;
 import com.zup.proposta.shared.annotations.CpfOrCnpj;
-import org.springframework.security.crypto.encrypt.Encryptors;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -88,7 +87,7 @@ public class Proposal {
         return card;
     }
 
-    public void associateCard(CardResponse response) {
+    public void associateCard(CardApiResponse response) {
         this.card = response.toEntity();
     }
 

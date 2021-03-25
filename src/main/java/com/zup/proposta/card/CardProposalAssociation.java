@@ -25,7 +25,7 @@ public class CardProposalAssociation {
     private void getCard() {
         List<Proposal> proposals = this.repository.findTop1000ByProposalStatusAndCardOrderByCreatedAtAsc(ProposalStatus.ELEGIVEL, null);
         for (Proposal proposal : proposals) {
-            CardResponse response = cardClient.getCard(new CardRequest(proposal));
+            CardApiResponse response = cardClient.getCard(new CardApiRequest(proposal));
             proposal.associateCard(response);
             repository.save(proposal);
         }

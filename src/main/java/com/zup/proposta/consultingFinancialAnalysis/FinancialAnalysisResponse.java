@@ -10,4 +10,12 @@ public class FinancialAnalysisResponse {
     public FinancialAnalysisStatus getStatus() {
         return status;
     }
+
+
+    @Override
+    public String toString() {
+        return "FinancialAnalysisResponse{" +
+                "status=" + status +
+                '}';
+    }
 }

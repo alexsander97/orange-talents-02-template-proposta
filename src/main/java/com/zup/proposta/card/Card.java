@@ -1,6 +1,10 @@
 package com.zup.proposta.card;
 
 import com.zup.proposta.biometry.Biometry;
+import com.zup.proposta.blocksCard.BlockCardApiResponse;
+import com.zup.proposta.blocksCard.StatusCard;
+import com.zup.proposta.newWallet.TypeAssociationWallet;
+import com.zup.proposta.newWallet.Wallet;
 
 
 import javax.persistence.*;
@@ -32,10 +36,18 @@ public class Card {
     @OneToMany(mappedBy = "card")
     private Set<Biometry> biometrics = new HashSet<>();
 
+    private StatusCard statusCard;
+
+    @OneToMany(mappedBy = "card")
+    private Set<Wallet> wallets = new HashSet<>();
 
     @Deprecated
     public Card() {
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getCardNumber() {
@@ -59,5 +71,17 @@ public class Card {
         this.holder = holder;
         this.limit = limit;
         this.issuedOn = issuedOn;
+    }
+
+    public boolean isBlocked() {
+        return statusCard.equals(StatusCard.BLOQUEADO);
+    }
+
+    public void updateStatus(BlockCardApiResponse response) {
+        this.statusCard = response.getStatusCard();
+    }
+
+    public boolean hasAssociationWallet(TypeAssociationWallet typeAssociationWallet) {
+        return wallets.contains(typeAssociationWallet);
     }
 }
