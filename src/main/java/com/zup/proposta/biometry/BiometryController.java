@@ -29,9 +29,6 @@ public class BiometryController {
     public ResponseEntity<?> create(@PathVariable("idCard") Long idCard,
                                     @RequestBody @Valid NewBiometryRequest request,
                                     UriComponentsBuilder uriComponentsBuilder)  {
-        Span activeSpan = tracer.activeSpan();
-        activeSpan.setTag("user.biometry", request.getFingerPrint());
-
         Card card = entityManager.find(Card.class, idCard);
         if (card == null) {
             return ResponseEntity.notFound().build();
