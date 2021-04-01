@@ -1,6 +1,9 @@
 package com.zup.proposta.biometry;
 
 import com.zup.proposta.card.Card;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +21,16 @@ public class BiometryController {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private Tracer tracer;
+
     @PostMapping("/card/{idCard}/biometry")
     @Transactional
     public ResponseEntity<?> create(@PathVariable("idCard") Long idCard,
                                     @RequestBody @Valid NewBiometryRequest request,
                                     UriComponentsBuilder uriComponentsBuilder)  {
+        Span activeSpan = tracer.activeSpan();
+        activeSpan.setTag("user.biometry", request.getFingerPrint());
 
         Card card = entityManager.find(Card.class, idCard);
         if (card == null) {

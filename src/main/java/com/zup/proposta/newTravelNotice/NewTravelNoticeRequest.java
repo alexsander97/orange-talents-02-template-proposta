@@ -18,6 +18,11 @@ public class NewTravelNoticeRequest {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endTravel;
 
+    public NewTravelNoticeRequest(@NotBlank String destiny, @NotNull @Future LocalDate endTravel) {
+        this.destiny = destiny;
+        this.endTravel = endTravel;
+    }
+
     public TravelNotice toEntity(Card card, String userAgent, String userIp) {
         return new TravelNotice(card, destiny, endTravel, userAgent, userIp);
     }

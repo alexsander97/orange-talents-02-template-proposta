@@ -5,6 +5,7 @@ import com.zup.proposta.card.CardApiResponse;
 import com.zup.proposta.consultingFinancialAnalysis.FinancialAnalysisStatus;
 import com.zup.proposta.consultingFinancialAnalysis.ProposalStatus;
 import com.zup.proposta.shared.annotations.CpfOrCnpj;
+import com.zup.proposta.shared.annotations.utils.EncryptorUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,14 +23,16 @@ public class Proposal {
     private Long id;
 
     @NotBlank
-    @CpfOrCnpj
+    @Column(unique = true, nullable = false)
     private String document;
 
     @NotBlank
     @Email
+    @Column(nullable = false)
     private String email;
 
     @NotBlank
+    @Column(nullable = false)
     private String name;
 
     @NotNull
@@ -38,6 +41,7 @@ public class Proposal {
 
     @NotNull
     @Positive
+    @Column(nullable = false)
     private BigDecimal salary;
 
     @Enumerated(EnumType.STRING)
@@ -47,6 +51,7 @@ public class Proposal {
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Deprecated
@@ -55,7 +60,7 @@ public class Proposal {
     }
 
     public Proposal(String document, String email, String name, Address address, BigDecimal salary) {
-        this.document = document;
+        this.document = EncryptorUtils.encryptorDocument(document);
         this.email = email;
         this.name = name;
         this.address = address;
@@ -95,17 +100,4 @@ public class Proposal {
         this.proposalStatus = status.getProposalStatus();
     }
 
-    @Override
-    public String toString() {
-        return "Proposal{" +
-                "id=" + id +
-                ", document='" + document + '\'' +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", address=" + address +
-                ", salary=" + salary +
-                ", proposalStatus=" + proposalStatus +
-                ", card=" + card +
-                '}';
-    }
 }

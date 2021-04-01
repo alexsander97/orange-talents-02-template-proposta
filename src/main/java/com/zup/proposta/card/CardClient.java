@@ -19,9 +19,9 @@ public interface CardClient {
     @PostMapping("/api/cartoes/{id}/bloqueios")
     BlockCardApiResponse block(@PathVariable String id, BlockCardApiRequest request);
 
-    @PostMapping("/{id}/avisos")
+    @PostMapping("/api/cartoes/{id}/avisos")
     TravelNoticeApiResponse travelNotice(@PathVariable String id, TravelNoticeApiRequest request);
 
-    @PostMapping("/{id}/carteiras")
+    @PostMapping("/api/cartoes/{id}/carteiras")
     WalletApiResponse wallet(@PathVariable String id, WalletApiRequest request);
 }

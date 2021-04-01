@@ -19,7 +19,9 @@ public class ProposalResponse {
         this.document = proposal.getDocument();
         this.proposalStatus = proposal.getProposalStatus();
         this.createdAt = proposal.getCreatedAt();
-        this.card = new CardDetailsResponse(proposal.getCard());
+        if (proposal.getCard() != null) {
+            this.card = new CardDetailsResponse(proposal.getCard());
+        }
     }
 
     public String getDocument() {

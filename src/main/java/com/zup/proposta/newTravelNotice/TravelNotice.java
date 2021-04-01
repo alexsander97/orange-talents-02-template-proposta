@@ -34,6 +34,7 @@ public class TravelNotice {
     @NotBlank
     private String userIp;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     public TravelNotice(Card card, String destiny, LocalDate endTravel, String userAgent, String userIp) {

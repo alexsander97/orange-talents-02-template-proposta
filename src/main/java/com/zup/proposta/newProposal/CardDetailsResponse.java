@@ -1,6 +1,5 @@
 package com.zup.proposta.newProposal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zup.proposta.card.Card;
 
 import java.math.BigDecimal;

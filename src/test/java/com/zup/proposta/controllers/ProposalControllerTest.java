@@ -13,18 +13,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEnti
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestEntityManager
+@ActiveProfiles("test")
 @Transactional
 public class ProposalControllerTest {
 
@@ -37,10 +41,10 @@ public class ProposalControllerTest {
     @Autowired
     private EntityManager entityManager;
 
-//
 //    @Test
 //    @DisplayName("deve retornar 201 quando os dados tiverem ok")
 //    public void test1() throws Exception {
+//
 //        NewProposalRequest request = new NewProposalRequestBuilder()
 //                .withDocument("54063341070").withEmail("teste@teste.com")
 //                .withName("Test")
@@ -52,8 +56,7 @@ public class ProposalControllerTest {
 //                        .build())
 //                .withSalary(new BigDecimal(2000.00)).build();
 //
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/api/proposal")
+//        mockMvc.perform(post("/api/proposal")
 //                .contentType(MediaType.APPLICATION_JSON)
 //                .content(mapper.writeValueAsString(request)))
 //                .andExpect(status().isCreated());
@@ -73,8 +76,7 @@ public class ProposalControllerTest {
 //                        .build())
 //                .withSalary(new BigDecimal(2000.00)).build();
 //
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/api/proposal")
+//        mockMvc.perform(post("/api/proposal")
 //                .contentType(MediaType.APPLICATION_JSON)
 //                .content(mapper.writeValueAsString(request)))
 //                .andExpect(status().isBadRequest());
@@ -99,8 +101,7 @@ public class ProposalControllerTest {
 //                        .build())
 //                .withSalary(new BigDecimal(2000.00)).build();
 //
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/api/proposal")
+//        mockMvc.perform(post("/api/proposal")
 //                .contentType(MediaType.APPLICATION_JSON)
 //                .content(mapper.writeValueAsString(request)))
 //                .andExpect(status().isUnprocessableEntity());

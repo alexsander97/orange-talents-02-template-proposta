@@ -3,6 +3,7 @@ package com.zup.proposta.blocksCard;
 import com.zup.proposta.card.Card;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,10 +13,15 @@ public class BlockCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String ipUser;
 
+    @NotBlank
+    @Column(nullable = false)
     private String userAgent;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @OneToOne

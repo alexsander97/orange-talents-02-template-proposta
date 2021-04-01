@@ -1,6 +1,7 @@
 package com.zup.proposta.newProposal;
 
 import com.zup.proposta.shared.annotations.CpfOrCnpj;
+import com.zup.proposta.shared.annotations.utils.EncryptorUtils;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

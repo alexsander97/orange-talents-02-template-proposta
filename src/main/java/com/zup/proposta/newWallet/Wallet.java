@@ -14,6 +14,7 @@ public class Wallet {
     private Long id;
 
     @NotBlank
+    @Column(nullable = false)
     private String associationId;
 
     @NotBlank
@@ -40,6 +41,10 @@ public class Wallet {
 
     public Long getId() {
         return id;
+    }
+
+    public TypeAssociationWallet getTypeAssociationWallet() {
+        return typeAssociationWallet;
     }
 
     @Deprecated

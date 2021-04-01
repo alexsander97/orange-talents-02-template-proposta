@@ -36,6 +36,7 @@ public class Card {
     @OneToMany(mappedBy = "card")
     private Set<Biometry> biometrics = new HashSet<>();
 
+    @Enumerated(EnumType.STRING)
     private StatusCard statusCard;
 
     @OneToMany(mappedBy = "card")
@@ -71,6 +72,7 @@ public class Card {
         this.holder = holder;
         this.limit = limit;
         this.issuedOn = issuedOn;
+        this.statusCard = StatusCard.ATIVO;
     }
 
     public boolean isBlocked() {
@@ -82,6 +84,6 @@ public class Card {
     }
 
     public boolean hasAssociationWallet(TypeAssociationWallet typeAssociationWallet) {
-        return wallets.contains(typeAssociationWallet);
+        return wallets.stream().anyMatch(wallet -> wallet.getTypeAssociationWallet().equals(typeAssociationWallet));
     }
 }

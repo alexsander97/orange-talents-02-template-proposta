@@ -1,7 +1,6 @@
 package com.zup.proposta.newTravelNotice;
 
-import com.zup.proposta.blocksCard.BlockCardApiRequest;
-import com.zup.proposta.blocksCard.BlockCardApiResponse;
+
 import com.zup.proposta.card.Card;
 import com.zup.proposta.card.CardClient;
 import org.springframework.beans.factory.annotation.Autowired;

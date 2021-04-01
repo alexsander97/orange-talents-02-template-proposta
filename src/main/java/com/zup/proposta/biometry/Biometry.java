@@ -15,6 +15,7 @@ public class Biometry {
     private Long id;
 
     @NotBlank
+    @Column(nullable = false)
     private String fingerPrint;
 
     @NotNull

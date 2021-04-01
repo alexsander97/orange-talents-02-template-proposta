@@ -19,15 +19,17 @@ public class CardProposalAssociation {
     private ProposalRepository repository;
 
 
-    @Scheduled(cron = "0 0 2 * * *")
-//    for test\/
-//    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "${CRON_CARD_PROPOSAL_ASSOCIATION}")
     private void getCard() {
         List<Proposal> proposals = this.repository.findTop1000ByProposalStatusAndCardOrderByCreatedAtAsc(ProposalStatus.ELEGIVEL, null);
         for (Proposal proposal : proposals) {
-            CardApiResponse response = cardClient.getCard(new CardApiRequest(proposal));
-            proposal.associateCard(response);
-            repository.save(proposal);
+            try {
+                CardApiResponse response = cardClient.getCard(new CardApiRequest(proposal));
+                proposal.associateCard(response);
+                repository.save(proposal);
+            } catch (Exception e) {
+                return;
+            }
         }
     }
 }

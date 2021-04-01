@@ -30,13 +30,4 @@ public class CardApiResponse {
         return new Card(cardNumber, holder, limit, issuedOn);
     }
 
-    @Override
-    public String toString() {
-        return "CardResponse{" +
-                "cardNumber='" + cardNumber + '\'' +
-                ", holder='" + holder + '\'' +
-                ", limit=" + limit +
-                ", issuedOn=" + issuedOn +
-                '}';
-    }
 }
